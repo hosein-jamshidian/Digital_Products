@@ -123,3 +123,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #AUTHORIZATION
 AUTH_USER_MODEL = 'users.User'
+
+#cache
+
+CACHE={
+    'default':{
+        'BACKEND':'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'unique-snowflake'}}

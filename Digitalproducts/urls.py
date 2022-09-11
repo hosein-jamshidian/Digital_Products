@@ -20,7 +20,9 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("",include("products.urls"),name="all_products_categories_files")
+    path("",include("products.urls"),name="all_products_categories_files"),
+    path("",include("users.urls"),name="all users model"),
+
 ]
 if settings.IS_DEVEL:
     urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
