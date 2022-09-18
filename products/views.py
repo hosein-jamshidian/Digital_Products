@@ -1,13 +1,17 @@
 from django.shortcuts import render
 from django.http import Http404
+
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
 from .models import File,Product,Category
 from .serializers import( FileSerializer,CategorySerializer,ProductSerializer)
-from rest_framework import status
+from rest_framework_simplejwt.views import TokenObtainPairView
 
 
 class ProductListView(APIView):
+    # permission_classes = [IsAuthenticated]
     def get(self,request):
         products=Product.objects.all()
         serializer=ProductSerializer(products,many=True,context={"request":request})
@@ -21,6 +25,7 @@ class ProductListView(APIView):
     #         return Response(serializer.data,status=status.HTTP_201_CREATED)
     #     return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
 class ProductDetailView(APIView):
+    permission_classes = [IsAuthenticated]
     def get_object(self,pk):
         try:
             product=Product.objects.get(pk=pk)
@@ -53,6 +58,7 @@ class CategoryListView(APIView):
         serializer=CategorySerializer(categories,many=True,context={"request":request})
         return Response(serializer.data)
 class CategoryDetailView(APIView):
+
     def get_object(self, product_id,pk):
         try:
             category = Category.objects.get(pk=pk,id=product_id)
@@ -81,3 +87,5 @@ class FileDetailView(APIView):
         file=self.get_object(product_id,pk)
         serializer=FileSerializer(file,context={"request":request})
         return Response(serializer.data)
+
+

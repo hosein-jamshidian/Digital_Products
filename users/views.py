@@ -6,6 +6,8 @@ from django.core.cache import cache
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
+
+
 from .models import User,Device
 
 class RegisterView(APIView):
@@ -38,3 +40,4 @@ class GetTokenView(APIView):
             return Response(status=status.HTTP_403_FORBIDDEN)
         token=str(uuid.uuid4())
         return Response({'token':token})
+
