@@ -7,7 +7,7 @@ from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from .models import File,Product,Category
 from .serializers import( FileSerializer,CategorySerializer,ProductSerializer)
-from rest_framework_simplejwt.views import TokenObtainPairView
+
 
 
 class ProductListView(APIView):

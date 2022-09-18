@@ -22,7 +22,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("",include("products.urls"),name="all_products_categories_files"),
     path("",include("users.urls"),name="all users model"),
-
+    path("subs/",include("subscriptions.urls"),name="all subscriptions model"),
+    path("payments/", include("payments.urls"), name="all payments model"),
 ]
 if settings.IS_DEVEL:
     urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
