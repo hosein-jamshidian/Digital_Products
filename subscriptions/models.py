@@ -7,12 +7,12 @@ from users.models import User
 
 class Package(models.Model):
     title=models.CharField(_("title"),max_length=50)
-    sku=models.CharField(_("stock keeping unit"),max_length=20)
+    sku=models.CharField(_("stock keeping unit"),max_length=20,validators=[validate_sku],db_index=True)
     description=models.TextField(_("description"),blank=True)
     avatar=models.ImageField(_("avatar"),blank=True,upload_to='packages/')
     is_enable=models.BooleanField(_("is enable"),default=True)
     price=models.PositiveIntegerField(_("price"))
-    #gateways=models.ManyToManyField(_("gateways"),'payments.Gateway')
+    #gateways=models.ManyToManyField('payments.Gateway',verbose_name=_("gateways"))
     duration=models.DurationField(_("duration"),blank=True,null=True)
     created_time=models.DateTimeField(_("created time"),auto_now_add=True)
     updated_time=models.DateTimeField(_("updated time"),auto_now=True)
